@@ -3,6 +3,7 @@ from flask_cors import CORS
 from app.database import load_users
 from app.utils.exceptions import AppError
 from app.routes.user import user_bp
+from app.routes.auth import auth_bp
 from sqlalchemy.exc import SQLAlchemyError
 
 def create_app():
@@ -22,6 +23,7 @@ def create_app():
     app.register_error_handler(SQLAlchemyError, handle_db_error)
 
     app.register_blueprint(user_bp)
+    app.register_blueprint(auth_bp)
     return app
 
 

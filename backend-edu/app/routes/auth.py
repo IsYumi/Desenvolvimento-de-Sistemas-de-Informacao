@@ -5,6 +5,8 @@ import app.services.user as user_service
 from app.utils.exceptions import BadRequest
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+@auth_bp.route('', methods=['POST', 'OPTIONS'])
 @auth_bp.route('/', methods=['POST', 'OPTIONS'])
 def IniciarLogin():
     if request.method == 'OPTIONS':
@@ -19,6 +21,7 @@ def IniciarLogin():
     otp_service.create(user_id=user.id)
     return jsonify({"ok": True, 'message': 'OTP enviado para o email'}), 200
 
+@auth_bp.route('/verificar-otp', methods=['POST', 'OPTIONS'])
 @auth_bp.route('/verificar-otp/', methods=['POST', 'OPTIONS'])
 def verificarotp():
     if request.method == 'OPTIONS':
@@ -27,7 +30,6 @@ def verificarotp():
     if not data:
         raise BadRequest("No data provided")
     email = data.get('email')
-    otp_code = data.get('otp')
-    user = user_service.find_by_email(email)
-    token = auth_service.validarOtp(user.id, otp_code)
+    otp_code = data.get('codigo')
+    token = auth_service.validarOtp(email, otp_code) 
     return jsonify({"ok": True, "token": token}), 200

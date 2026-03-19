@@ -3,6 +3,7 @@ import app.services.user as user_service
 from app.utils.exceptions import BadRequest
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
+@user_bp.route('', methods = ['POST', 'OPTIONS'])
 @user_bp.route('/', methods = ['POST', 'OPTIONS'])
 def add():
     if request.method == 'OPTIONS':

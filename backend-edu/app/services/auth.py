@@ -19,7 +19,8 @@ def login(email: str, password: str):
     
 def validarOtp(email:str , otp_code: str):
     with SessionLocal() as bd:
-        user = UserRepository(bd).find_by_email(email)
+        user_repo = UserRepository(bd)
+        user = user_repo.find_by_email(email)
         if user is None:
             raise UserNotFound()
         otp = OtpRepository(bd).find_by_user(user.id)

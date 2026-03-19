@@ -1,6 +1,6 @@
 from app.models.otp import Otp
 from app.utils.token import generate_token
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 class OtpRepository:
     def __init__(self, session):
@@ -9,7 +9,7 @@ class OtpRepository:
     def create(self, user_id: int):
         self._clean_user(user_id=user_id)
         token = generate_token()
-        valid_at = datetime.now() + timedelta(minutes=10)
+        valid_at = datetime.now(UTC) + timedelta(minutes=10)
         otp = Otp (user_id=user_id, code=token, valid_at=valid_at)
         try:
             self.bd.add(otp)

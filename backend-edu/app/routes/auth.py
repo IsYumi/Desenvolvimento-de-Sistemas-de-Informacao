@@ -10,11 +10,10 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 def IniciarLogin():
     if request.method == 'OPTIONS':
         return jsonify({'message': 'OK'}), 200
-
     data = request.get_json()
     email = data.get('email')
-    password = data.get('password')
+    password = data.get('senha')
     if auth_service.login(email, password):
-        otp_service.create(user_id=user_service.get_user_id_by_email(email))
+        otp_service.create(user_id=user_service.find_by_email(email))
         return jsonify({'message': 'OTP enviado para o email'}), 200
     return jsonify({'message': 'Falha no login'}), 401

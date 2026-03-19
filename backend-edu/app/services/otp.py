@@ -8,7 +8,7 @@ def create(user_id):
     with SessionLocal() as bd:
         otp_repo = OtpRepository(bd)
         user_repo = UserRepository(bd)
-        user = user_repo.get_by_id(user_id=user_id)
+        user = user_repo.get(user_id)
         if user is None:
             raise UserNotFound()
         otp = otp_repo.create(user_id)

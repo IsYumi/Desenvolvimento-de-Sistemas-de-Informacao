@@ -39,3 +39,11 @@ def delete(user_id):
         if user is None:
             raise UserNotFound()
         return True
+
+def find_by_email(email):
+    with SessionLocal() as bd:
+        user_repo = UserRepository(bd)
+        user = user_repo.find_by_email(email=email)
+        if user is None:
+            raise UserNotFound()
+        return user.to_dict()

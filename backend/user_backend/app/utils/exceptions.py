@@ -1,0 +1,43 @@
+class AppError(Exception):
+    def __init__(self, message: str, status_code: int):
+        self.message = message
+        self.status_code = status_code
+        super().__init__(message)
+
+#Email
+class EmailAlreadyRegistered(AppError):
+    def __init__(self):
+        super().__init__("Email already registered", 409)
+
+#User
+class UserNotFound(AppError):
+    def __init__(self):
+        super().__init__("User not found", 404)
+
+#Otp
+class OtpExpired(AppError):
+    def __init__(self):
+        super().__init__("Expired Otp", 403)
+
+class InvalidOtp(AppError):
+    def __init__(self):
+        super().__init__("Invalid Otp", 403)
+
+class OtpNotFound(AppError):
+    def __init__(self):
+        super().__init__("Otp not found", 404)
+
+#Outros
+class InvalidCredentials(AppError):
+    def __init__(self):
+        super().__init__("Invalid credentials", 401)
+
+class BadRequest(AppError):
+    def __init__(self, message="Invalid request"):
+        super().__init__(message, 400)
+
+
+        
+
+
+

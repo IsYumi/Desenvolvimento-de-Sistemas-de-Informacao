@@ -5,6 +5,8 @@ user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/', methods = ['POST', 'OPTIONS'])
 def add():
+    if request.method == 'OPTIONS':
+        return '', 200
     data = request.get_json()
     if not data:
         raise BadRequest("No data provided")

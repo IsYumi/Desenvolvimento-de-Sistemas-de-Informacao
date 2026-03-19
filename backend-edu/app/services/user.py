@@ -10,7 +10,7 @@ def add(nome, email, password):
         user_repo = UserRepository(bd)
         if user_repo.find_by_email(email=email) is not None:
             raise EmailAlreadyRegistered()
-        return user_repo.create(nome=nome, email=email, password_hash=password_hash(password))
+        return user_repo.create(nome=nome, email=email, password=password)
 
 def get(user_id):
     with SessionLocal() as bd:

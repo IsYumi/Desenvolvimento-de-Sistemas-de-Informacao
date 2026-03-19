@@ -46,4 +46,4 @@ def find_by_email(email):
         user = user_repo.find_by_email(email=email)
         if user is None:
             raise UserNotFound()
-        return user.to_dict()
+        return user

@@ -10,7 +10,7 @@ def add(nome, email, password):
         user_repo = UserRepository(bd)
         if user_repo.find_by_email(email=email) is not None:
             raise EmailAlreadyRegistered()
-        return user_repo.create(nome=nome, email=email, password=password)
+        return user_repo.create(nome=nome, email=email, password=password).to_dict()  
 
 def get(user_id):
     with SessionLocal() as bd:
@@ -18,7 +18,7 @@ def get(user_id):
         user = user_repo.get(user_id)
         if user is None:
             raise UserNotFound()
-        return user
+        return user.to_dict()  
     
 def update(user_id, data):
     with SessionLocal() as bd:
@@ -30,7 +30,7 @@ def update(user_id, data):
         user = user_repo.update(user_id=user_id, data=data)
         if user is None:
             raise UserNotFound()
-        return user
+        return user.to_dict()  
     
 def delete(user_id):
     with SessionLocal() as bd:
@@ -38,4 +38,4 @@ def delete(user_id):
         user = user_repo.remove(user_id=user_id)
         if user is None:
             raise UserNotFound()
-        return user
+        return True

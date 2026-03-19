@@ -11,7 +11,10 @@ def add():
     if not data:
         raise BadRequest("No data provided")
     try:
-        return jsonify(user_service.add(data['nome'], data['email'], data['senha']).to_dict()), 201
+        return jsonify({
+            "ok": True,
+            "usuario": user_service.add(data['nome'], data['email'], data['senha'])
+        }), 201
     except KeyError as err:
         raise BadRequest(f"Missing argument: {err.args[0]}")
 
@@ -28,7 +31,7 @@ def update(user_id):
         raise BadRequest("No data provided")
     try:
         user = user_service.update(user_id, data)
-        return jsonify(user.to_dict()), 200
+        return jsonify({"ok": True, "usuario": user}), 200
     except KeyError as err:
         raise BadRequest(f"Missing argument: {err.args[0]}")
 

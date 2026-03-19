@@ -3,7 +3,6 @@ const BASE_URL = "http://localhost:3333";
 export async function apiPost<T>(rota: string, dados: unknown): Promise<T> {
   const resposta = await fetch(`${BASE_URL}${rota}`, {
     method: "POST",
-    mode: "no-cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dados),
   });

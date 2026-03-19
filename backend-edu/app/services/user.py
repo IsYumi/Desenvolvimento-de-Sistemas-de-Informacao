@@ -6,14 +6,14 @@ from app.utils.password import password_hash
 blacklist = {"id", "created_at"}
 
 def add(nome, email, password):
-    with SessionLocal as bd:
+    with SessionLocal() as bd:
         user_repo = UserRepository(bd)
-        if user_repo.get_by_email(email=email) is not None:
+        if user_repo.find_by_email(email=email) is not None:
             raise EmailAlreadyRegistered()
         return user_repo.create(nome=nome, email=email, password_hash=password_hash(password))
 
 def get(user_id):
-    with SessionLocal as bd:
+    with SessionLocal() as bd:
         user_repo = UserRepository(bd)
         user = user_repo.get(user_id)
         if user is None:
@@ -21,7 +21,7 @@ def get(user_id):
         return user
     
 def update(user_id, data):
-    with SessionLocal as bd:
+    with SessionLocal() as bd:
         user_repo = UserRepository(bd)
         data = {k: v for k, v in data.items() if k not in blacklist}
         if "password" in data:
@@ -33,9 +33,9 @@ def update(user_id, data):
         return user
     
 def delete(user_id):
-    with SessionLocal as bd:
+    with SessionLocal() as bd:
         user_repo = UserRepository(bd)
-        user = user_repo.remove_by_id(user_id=user_id)
+        user = user_repo.remove(user_id=user_id)
         if user is None:
             raise UserNotFound()
         return user

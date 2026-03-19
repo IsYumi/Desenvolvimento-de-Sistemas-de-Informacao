@@ -5,8 +5,8 @@ class UserRepository:
     def __init__(self, session):
         self.bd = session
 
-    def create(self, email: str, password: str):
-        user = User(email=email,password_hash=password_hash(password))
+    def create(self, nome: str, email: str, password: str):
+        user = User(nome=nome, email=email, password_hash=password_hash(password))
         try:
             self.bd.add(user)
             self.bd.commit()

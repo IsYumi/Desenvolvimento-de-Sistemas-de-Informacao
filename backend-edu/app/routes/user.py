@@ -3,13 +3,13 @@ import app.services.user as user_service
 from app.utils.exceptions import BadRequest
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
-@user_bp.route('/', methods = ['POST'])
+@user_bp.route('/', methods = ['POST', 'OPTIONS'])
 def add():
     data = request.get_json()
     if not data:
         raise BadRequest("No data provided")
     try:
-        return jsonify(user_service.insert(data['nome'], data['email'], data['senha']).to_dict()), 201
+        return jsonify(user_service.add(data['nome'], data['email'], data['senha']).to_dict()), 201
     except KeyError as err:
         raise BadRequest(f"Missing argument: {err.args[0]}")
 

@@ -7,19 +7,19 @@ from sqlalchemy.exc import SQLAlchemyError
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
+    CORS(app,
+     resources={r"/*": {"origins": "http://localhost:5173"}},
+     supports_credentials=True,
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
     def handle_app_error(e):
         return jsonify({"error": f"{e}"}), e.status_code
     
     def handle_db_error(e):
         return jsonify({"error": f"{e}"}), 500
 
-    def handle_unexpected(e):
-        return jsonify({"error": f"{e}"}), 500
     
     app.register_error_handler(AppError, handle_app_error)
     app.register_error_handler(SQLAlchemyError, handle_db_error)
-    app.register_error_handler(Exception, handle_unexpected)
 
     app.register_blueprint(user_bp)
     return app

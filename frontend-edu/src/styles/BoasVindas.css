@@ -1,0 +1,23 @@
+.boas-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* 🔥 empilha verticalmente */
+  margin-top: 160px;
+  align-items: center; /* 🔥 centraliza horizontal */
+  background: #ffff;
+  text-align: center;
+}
+
+/* TEXTO */
+.boas-container h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px; /* 🔥 espaço entre texto e gif */
+  color: black;
+}
+
+/* IMAGEM */
+.boas-container img {
+  width: 150px;
+  background: #ffff;
+}

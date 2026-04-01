@@ -1,109 +1,209 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cadastrar } from "../service/authService";
+import "../styles/cadastro.css";
 
 export default function Cadastro() {
   const navigate = useNavigate();
 
   const [nome, setNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("");
+  const [genero, setGenero] = useState("");
+  const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
+  const [confirmarEmail, setConfirmarEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [aceitouTermos, setAceitouTermos] = useState(false); // 👈 corrigido
+
   const [mensagem, setMensagem] = useState("");
 
   function validarEmail(email: string) {
     return /\S+@\S+\.\S+/.test(email);
   }
 
-  async function handleCadastro(e: React.FormEvent<HTMLFormElement>) {
+  async function handleCadastro(e: React.FormEvent) {
     e.preventDefault();
     setMensagem("");
 
-    if (!nome.trim() || !email.trim() || !senha.trim()) {
-      setMensagem("Preencha todos os campos.");
+    if (!nome || !email || !senha) {
+      setMensagem("Preencha os campos obrigatórios.");
+      return;
+    }
+
+    if (email !== confirmarEmail) {
+      setMensagem("Os e-mails não coincidem.");
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      setMensagem("As senhas não coincidem.");
       return;
     }
 
     if (!validarEmail(email)) {
-      setMensagem("Digite um e-mail válido.");
+      setMensagem("E-mail inválido.");
       return;
     }
 
     if (senha.length < 6) {
-      setMensagem("A senha deve ter pelo menos 6 caracteres.");
+      setMensagem("A senha deve ter no mínimo 6 caracteres.");
+      return;
+    }
+
+    if (genero === "") {
+      setMensagem("Selecione um gênero.");
+      return;
+    }
+
+    if (!aceitouTermos) {
+      setMensagem("Você deve aceitar os termos.");
       return;
     }
 
     try {
-      const resposta = await cadastrar(nome.trim(), email.trim(), senha);
+      const resposta = await cadastrar(
+        nome,
+        sobrenome,
+        email,
+        senha,
+        genero,
+        telefone,
+      );
 
       if (resposta.ok) {
-        setMensagem(
-          "Cadastro realizado com sucesso! Redirecionando para o login...",
-        );
-        setTimeout(() => {
-          navigate("/login");
-        }, 1200);
+        navigate("/login");
       } else {
         setMensagem(resposta.mensagem || "Erro ao cadastrar");
       }
     } catch (erro) {
-      const mensagemErro =
-        erro instanceof Error ? erro.message : "Erro ao cadastrar";
-      setMensagem(mensagemErro);
+      setMensagem("Erro ao cadastrar");
     }
   }
 
+  function irParaLogin() {
+    navigate("/login");
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
-        <h1 className="text-2xl font-bold text-center mb-6">Cadastro</h1>
+    <div className="cadastro-container">
+      <button className="btn-voltar" onClick={() => navigate("/")}>
+        VOLTAR
+      </button>
 
-        <form onSubmit={handleCadastro} className="space-y-4">
-          <div>
-            <label className="block mb-1 font-medium">Nome</label>
-            <input
-              type="text"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 outline-none"
-              placeholder="Digite seu nome"
-            />
+      <h1 className="titulo">CRIAR CONTA</h1>
+
+      <form onSubmit={handleCadastro} className="formulario">
+        {/* COLUNA ESQUERDA */}
+        <div className="coluna">
+          <label>NOME</label>
+          <input value={nome} onChange={(e) => setNome(e.target.value)} />
+
+          <label>GÊNERO</label>
+          <div className="genero">
+            <label>
+              <input
+                type="radio"
+                name="genero"
+                onChange={() => setGenero("F")}
+              />
+              FEMININO
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="genero"
+                onChange={() => setGenero("M")}
+              />
+              MASCULINO
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="genero"
+                onChange={() => setGenero("N")}
+              />
+              NÃO INFORMAR
+            </label>
           </div>
 
-          <div>
-            <label className="block mb-1 font-medium">E-mail</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 outline-none"
-              placeholder="Digite seu e-mail"
-            />
-          </div>
+          <label>E-MAIL</label>
+          <input value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          <div>
-            <label className="block mb-1 font-medium">Senha</label>
-            <input
-              type="password"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              className="w-full border rounded-lg px-3 py-2 outline-none"
-              placeholder="Digite sua senha"
-            />
-          </div>
+          <label>SENHA</label>
+          <input
+            type="senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+        </div>
 
-          {mensagem && (
-            <p className="text-sm text-center text-red-600">{mensagem}</p>
-          )}
+        {/* COLUNA DIREITA */}
+        <div className="coluna">
+          <label>SOBRENOME</label>
+          <input
+            value={sobrenome}
+            onChange={(e) => setSobrenome(e.target.value)}
+          />
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:opacity-90"
-          >
-            Cadastrar
-          </button>
-        </form>
+          <label>TELEFONE</label>
+          <input
+            value={telefone}
+            onChange={(e) => setTelefone(e.target.value)}
+          />
+
+          <label>CONFIRMAR E-MAIL</label>
+          <input
+            value={confirmarEmail}
+            onChange={(e) => setConfirmarEmail(e.target.value)}
+          />
+
+          <label>CONFIRMAR SENHA</label>
+          <input
+            type="senha"
+            value={confirmarSenha}
+            onChange={(e) => setConfirmarSenha(e.target.value)}
+          />
+        </div>
+      </form>
+
+      {/* CHECKBOX */}
+      <div className="checkbox-area">
+        <div className="checkbox-item">
+          <input
+            type="checkbox"
+            id="termos"
+            checked={aceitouTermos}
+            onChange={(e) => setAceitouTermos(e.target.checked)}
+          />
+          <label htmlFor="termos">Li e aceito os termos</label>
+        </div>
+
+        <div className="checkbox-item">
+          <input type="checkbox" id="dicas" />
+          <label htmlFor="dicas">
+            Aceito receber dicas de estudo, conteúdos exclusivos e promoções
+          </label>
+        </div>
       </div>
+
+      {mensagem && <p className="erro">{mensagem}</p>}
+
+      {/* BOTÕES */}
+      <div className="botoes-container">
+        <button className="btn-confirmar" onClick={handleCadastro}>
+          CONFIRMAR
+        </button>
+
+        <button className="btn-login" onClick={irParaLogin}>
+          LOGIN
+        </button>
+      </div>
+
+      {/* MONSTRINHO */}
+      <img src="/monster_1.gif" alt="monstro" className="monster" />
     </div>
   );
 }

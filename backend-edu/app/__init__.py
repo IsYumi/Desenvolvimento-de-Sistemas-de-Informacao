@@ -1,9 +1,10 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from app.database import load_users
+from app.user_database import load_users
+from app.product_database import load_products
 from app.utils.exceptions import AppError
-from app.routes.user import user_bp
-from app.routes.auth import auth_bp
+from app.routes.user.user import user_bp
+from app.routes.user.auth import auth_bp
 from sqlalchemy.exc import SQLAlchemyError
 
 def create_app():
@@ -29,13 +30,6 @@ def create_app():
 
 def start():
     load_users()
+    load_products()
     app = create_app()
-
-    @app.after_request
-    def after_request(response):
-        response.headers["Access-Control-Allow-Origin"] = "http://localhost:5173"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
-        return response
-    app.after_request(after_request)
     return app

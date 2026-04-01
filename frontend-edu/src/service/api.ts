@@ -4,6 +4,7 @@ export async function apiPost<T>(rota: string, dados: unknown): Promise<T> {
   const resposta = await fetch(`${BASE_URL}${rota}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify(dados),
   });
 

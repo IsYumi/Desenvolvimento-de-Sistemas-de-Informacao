@@ -1,0 +1,115 @@
+/* CONTAINER */
+.login-container {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100vh;
+  width: 100%;
+}
+
+/* LADO ESQUERDO */
+.login-left {
+  background: #ffffff;
+  padding-left: 120px;
+  padding-top: 80px;
+  
+}
+
+/* TÍTULO */
+.titulo-login {
+  position: relative;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+  
+    
+}
+
+/* LINHA LONGA VINDO DA ESQUERDA */
+.titulo-login::after {
+  content: "";
+  position: absolute;
+  left: -120px;
+  width: 260px;
+  bottom: -18px;
+  height: 2px; 
+  margin-bottom: 18px;
+  background: black;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+}
+
+.form-group input {
+  color: #000;
+  margin-bottom: 18px;
+
+}
+
+.btn-codigo,
+.btn-login {
+  color: #000;
+}
+
+/* INPUT */
+.form-group input {
+  display: block;
+  margin-top: 8px;
+  width: 320px;
+  padding: 12px;
+  border-radius: 12px;
+  border: solid 1.5px;
+  background: #d9d7d7c9;
+  outline: none;
+}
+
+/* BOTÃO CÓDIGO */
+.btn-codigo {
+  margin-top: 25px;
+  width: 320px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #f6aa63;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* BOTÃO LOGIN */
+.btn-login {
+  margin-top: 15px;
+  width: 320px;
+  border-radius: 12px;
+  border: none;
+  background: #58d68d;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* LINK */
+.link-senha {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #0077cc;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* LADO DIREITO */
+.login-right {
+  width: 70%;
+  height: 100%;
+}
+
+.login-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

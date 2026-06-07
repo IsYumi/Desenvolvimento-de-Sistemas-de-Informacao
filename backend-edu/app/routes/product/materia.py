@@ -42,3 +42,4 @@ def delete():
         return jsonify({"ok": True, "mensagem": "Materia deletado com sucesso"}), 200
     except Exception as e:
         return jsonify({"ok": False, "mensagem": "Erro ao deletar"}), 500
+    

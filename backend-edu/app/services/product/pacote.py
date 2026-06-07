@@ -19,3 +19,8 @@ def delete(pacote_id):
     with SessionLocal() as bd:
         pacote_repo = PacoteRepository(bd)
         return pacote_repo.delete(pacote_id)
+    
+def get_by_materia(materia_id):
+    with SessionLocal() as bd:
+        pacote_repo = PacoteRepository(bd)
+        return [pacote.to_dict() for pacote in pacote_repo.get_by_materia(materia_id)]

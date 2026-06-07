@@ -6,9 +6,22 @@ export type RespostaPadrao = {
   mensagem?: string;
 };
 
-export async function cadastrar(nome: string, sobrenome: string, email: string, 
-  senha: string, genero: string, telefone: string) {
-  return apiPost<RespostaPadrao>("/user/", { nome, sobrenome, email, senha, genero, telefone });
+export async function cadastrar(
+  nome: string,
+  sobrenome: string,
+  email: string,
+  senha: string,
+  genero: string,
+  telefone: string,
+) {
+  return apiPost<RespostaPadrao>("/user/", {
+    nome,
+    sobrenome,
+    email,
+    senha,
+    genero,
+    telefone,
+  });
 }
 
 // passo A: valida email/senha e dispara OTP (no futuro via EmailJS)

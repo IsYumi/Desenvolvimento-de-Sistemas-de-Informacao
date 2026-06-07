@@ -47,3 +47,15 @@ def delete():
         return jsonify({"ok": True, "mensagem": "Pacote deletado com sucesso"}), 200
     except Exception as e:
         return jsonify({"ok": False, "mensagem": "Erro ao deletar"}), 500
+    
+@pacote_bp.route('/get/<int:id>', methods = ['GET', 'OPTIONS'])
+@pacote_bp.route('/get/<int:id>/', methods = ['GET', 'OPTIONS'])
+def get_by_materia(id):
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'OK'}), 200
+    try:
+        pacotes = pacote_service.get_by_materia(id)
+        return jsonify({"ok": True, "pacotes": pacotes}), 200
+    except Exception as e:
+        print("Erro ao buscar pacotes:", e)
+        return jsonify({"ok": False, "mensagem": "Erro ao buscar pacotes"}), 500

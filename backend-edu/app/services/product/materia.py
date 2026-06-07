@@ -20,3 +20,4 @@ def delete(materia_id):
     with SessionLocal() as db:
         materia_repo = MateriaRepository(db)
         return materia_repo.delete(materia_id)
+    

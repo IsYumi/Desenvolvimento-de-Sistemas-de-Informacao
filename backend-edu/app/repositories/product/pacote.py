@@ -41,3 +41,6 @@ class PacoteRepository:
         except Exception:
             self.bd.rollback()
             raise
+    
+    def get_by_materia(self, materia_id):
+        return self.bd.query(Pacote).filter_by(materia_id=materia_id).all()

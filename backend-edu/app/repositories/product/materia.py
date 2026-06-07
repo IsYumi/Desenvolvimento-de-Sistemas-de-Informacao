@@ -41,3 +41,7 @@ class MateriaRepository:
         except Exception:
             self.bd.rollback()
             raise
+        
+    def get_all(self):
+        from app.models.product.materia import Materia
+        return self.bd.query(Materia).all()

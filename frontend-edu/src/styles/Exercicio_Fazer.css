@@ -1,0 +1,93 @@
+.exercicio-fazer-cabecalho {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.exercicio-fazer-card {
+  background: #ffffff;
+  border: 2px solid #000;
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.exercicio-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+.exercicio-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+  margin: 10px 0 0 0;
+  text-transform: uppercase;
+}
+
+.exercicio-pergunta {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+.exercicio-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.exercicio-input-group label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.exercicio-input-group input {
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: #f9f9f9;
+}
+
+.exercicio-input-group input:focus {
+  border-color: #63ff96;
+  background: #fff;
+}
+
+.botao-confirmar {
+  background: #63ff96;
+  color: #000;
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.botao-confirmar:hover {
+  background: #4ae87d;
+}
+
+.botao-confirmar:active {
+  transform: scale(0.98);
+}

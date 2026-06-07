@@ -26,3 +26,9 @@ def get_by_id(materia_id):
         repo = MateriaRepository(db)
         materia = repo.get(materia_id)
         return materia.to_dict() if materia else None
+    
+def get_all():
+    with SessionLocal() as db:
+        repo = MateriaRepository(db)
+        materias = repo.get_all()
+        return [m.to_dict() for m in materias]

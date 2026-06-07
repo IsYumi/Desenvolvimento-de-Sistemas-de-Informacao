@@ -1,21 +1,61 @@
-import "../styles/Home.css";
-import Navbar from "../components/Navbar";
-import ursoGif from "../assets/urso.gif";
-import alfabetoImg from "../assets/alfabeto.jpg";
-import animaisImg from "../assets/animais.jpg";
-import numerosImg from "../assets/numeros.jpg";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import { apiGet } from "../service/api";
+import ursoGif from "../assets/urso.gif";
+import "../styles/Home.css";
+
+interface Materia {
+  id: number;
+  nome: string;
+  descricao?: string;
+}
+
+interface RespostaMaterias {
+  ok: boolean;
+  materias?: Materia[];
+  mensagem?: string;
+}
 
 export default function Home() {
   const navigate = useNavigate();
+
+  const [materias, setMaterias] = useState<Materia[]>([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function carregarMaterias() {
+      try {
+        setCarregando(true);
+        setErro(null);
+
+        // Chamada para a API buscar todas as matérias
+        const dados = await apiGet<RespostaMaterias>("/materia/list");
+
+        if (dados && dados.ok) {
+          setMaterias(dados.materias || []);
+        } else {
+          throw new Error(
+            dados?.mensagem || "Ocorreu um erro ao carregar as matérias.",
+          );
+        }
+      } catch (err: any) {
+        setErro(err.message || "Não foi possível carregar as matérias.");
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    carregarMaterias();
+  }, []);
 
   return (
     <div className="home-container">
       <Navbar />
 
-      {/* CONTAINER CENTRAL */}
       <div className="content">
-        {/* TÍTULO */}
+        {/* TÍTULO PRESERVADO */}
         <div className="titulo-section">
           <div className="titulo-text">
             <h2>O QUE VAMOS FAZER HOJE?</h2>
@@ -23,34 +63,37 @@ export default function Home() {
           <img src={ursoGif} alt="urso mascote" className="urso-mascote" />
         </div>
 
-        {/* PORTUGUÊS */}
-        <div className="materia">
-          <h3>PORTUGUÊS</h3>
+        {/* FEEDBACK DE CARREGAMENTO/ERRO */}
+        {carregando && (
+          <p className="status-mensagem">Carregando matérias...</p>
+        )}
+        {erro && <p className="status-mensagem erro">Erro: {erro}</p>}
 
-          <div className="grid">
-            <div className="card">
-              <h4>ALFABETO</h4>
-              <img src={alfabetoImg} alt="alfabeto" className="card-image" />
-            </div>
+        {!carregando && !erro && materias.length === 0 && (
+          <p className="status-mensagem">
+            Nenhuma matéria disponível no momento.
+          </p>
+        )}
 
-            <div className="card">
-              <h4>ANIMAIS</h4>
-              <img src={animaisImg} alt="animais" className="card-image" />
-            </div>
+        {/* LISTAGEM DINÂMICA DE MATÉRIAS */}
+        {!carregando && !erro && materias.length > 0 && (
+          <div className="lista-pacotes-container">
+            {materias.map((materia) => (
+              <div key={materia.id} className="pacote-card">
+                <div className="pacote-info">
+                  <h3>{materia.nome}</h3>
+                  {materia.descricao && <p>{materia.descricao}</p>}
+                </div>
+                <button
+                  className="botao-abrir"
+                  onClick={() => navigate(`/materia-lista/${materia.id}`)}
+                >
+                  Ver Pacotes
+                </button>
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* MATEMÁTICA */}
-        <div className="materia">
-          <h3>MATEMÁTICA</h3>
-
-          <div className="grid">
-            <div className="card">
-              <h4>NÚMEROS</h4>
-              <img src={numerosImg} alt="numeros" className="card-image" />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

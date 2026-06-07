@@ -1,11 +1,12 @@
-/* BASE */
+/* =========================================
+   BASE & NAVBAR (MANTIDOS DO ORIGINAL)
+   ========================================= */
 .home-container {
   background: #f5f5f5;
   font-family: "Poppins", "Segoe UI", Arial, sans-serif;
   min-height: 100vh;
 }
 
-/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -22,7 +23,6 @@
   box-sizing: border-box;
 }
 
-/* LOGO */
 .nav-left {
   display: flex;
   align-items: center;
@@ -39,7 +39,6 @@
   flex-shrink: 0;
 }
 
-/* LINKS CENTRALIZADOS */
 .nav-center {
   display: flex;
   gap: 50px;
@@ -71,7 +70,6 @@
   border-bottom: 3px solid #000;
 }
 
-/* BOTÃO SAIR */
 .nav-right {
   display: flex;
   align-items: center;
@@ -100,7 +98,9 @@
   box-shadow: none;
 }
 
-/* CONTAINER CENTRAL */
+/* =========================================
+   CABEÇALHO COM O MASCOTE (RECUPERADO)
+   ========================================= */
 .content {
   width: 100%;
   padding: 110px 30px 40px 30px;
@@ -108,11 +108,10 @@
   box-sizing: border-box;
 }
 
-/* SEÇÃO TÍTULO */
 .titulo-section {
   display: flex;
   align-items: flex-end;
-  margin-top: -8px; /* levantado 5px */
+  margin-top: -8px;
   margin-bottom: 25px;
   margin-left: -30px;
   margin-right: -30px;
@@ -120,7 +119,7 @@
   padding-left: 30px;
   padding-right: 30px;
   border-bottom: 3px solid #000;
-  transform: translateY(-5px); /* subindo 5px */
+  transform: translateY(-5px);
 }
 
 .titulo-text {
@@ -137,65 +136,76 @@
 .urso-mascote {
   width: 85px;
   height: auto;
-  margin-top: 5px; /* ajustado para ficar maior proximidade e subir */
-  transform: translateY(6px); /* subindo 5px */
+  margin-top: 5px;
+  transform: translateY(6px);
 }
 
-/* SEÇÃO MATÉRIAS */
-.materia {
-  margin-bottom: 50px;
+/* =========================================
+   LISTAGEM DE MATÉRIAS (NOVO VISUAL)
+   ========================================= */
+.lista-pacotes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  width: 100%;
 }
 
-.materia h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #000;
-  border-bottom: 2px solid #000;
-  display: inline-block;
-  padding-bottom: 8px;
-  margin-bottom: 25px;
-  letter-spacing: 0.5px;
-}
-
-/* GRID DE CARDS */
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 35px;
-}
-
-/* CARD */
-.card {
-  background: #e8dcc8;
+.pacote-card {
+  background: #ffffff;
   border: 2px solid #000;
-  border-radius: 25px;
-  padding: 20px;
-  width: 250px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
+.pacote-card:hover {
+  transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* TÍTULO DO CARD */
-.card h4 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #000;
-  letter-spacing: 0.5px;
+.pacote-info {
+  margin-bottom: 24px;
 }
 
-/* IMAGEM DO CARD */
-.card-image {
+.pacote-info h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.botao-abrir {
+  background: #63ff96;
+  color: #000;
+  border: none;
+  padding: 14px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  display: block;
+  transition: background 0.2s;
+  text-transform: uppercase;
+}
+
+.botao-abrir:hover {
+  background: #4ae87d;
+}
+
+.status-mensagem {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.status-mensagem.erro {
+  color: red;
 }

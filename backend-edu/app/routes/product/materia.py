@@ -56,3 +56,14 @@ def get_materia(id):
         return jsonify({"ok": False, "mensagem": "Matéria não encontrada"}), 404
     except Exception as e:
         return jsonify({"ok": False, "mensagem": str(e)}), 500
+
+@materia_bp.route('/list', methods=['GET', 'OPTIONS'])
+@materia_bp.route('/list/', methods=['GET', 'OPTIONS'])
+def get_all_materias():
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'OK'}), 200
+    try:
+        materias = materia_service.get_all()
+        return jsonify({"ok": True, "materias": materias}), 200
+    except Exception as e:
+        return jsonify({"ok": False, "mensagem": str(e)}), 500

@@ -17,6 +17,7 @@ import Assinatura from "./pages/Assinatura";
 import Editar_Exercicio from "./pages/Editar_Exercicio";
 import Materia_Usuario from "./pages/Materia_Lista";
 import Pacote_Lista from "./pages/Pacote_Lista";
+import Exercicio_Fazer from "./pages/Exercicio_Fazer";
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
         <Route path="/assinatura" element={<Assinatura />} />
         <Route path="/materia-lista/:id" element={<Materia_Usuario />} />
         <Route path="/pacote-lista/:id" element={<Pacote_Lista />} />
+        <Route path="/exercicio-fazer/:id" element={<Exercicio_Fazer />} />
       </Routes>
     </BrowserRouter>
   );

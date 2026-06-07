@@ -19,3 +19,17 @@ def delete(exercicio_id):
     with SessionLocal() as bd:
         exercicio_repo = ExercicioRepository(bd)
         return exercicio_repo.delete(exercicio_id)
+    
+def get(exercicio_id):
+    with SessionLocal() as bd:
+        exercicio_repo = ExercicioRepository(bd)
+        exercicio = exercicio_repo.get(exercicio_id)
+        if exercicio is None:
+            raise Exception("Exercício não encontrado")
+        return exercicio.to_dict()
+
+def get_by_pacote(pacote_id):
+    with SessionLocal() as bd:
+        exercicio_repo = ExercicioRepository(bd)
+        exercicios = exercicio_repo.get_by_pacote(pacote_id)
+        return [exercicio.to_dict() for exercicio in exercicios]

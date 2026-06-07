@@ -41,3 +41,6 @@ class ExercicioRepository:
         except Exception:
             self.bd.rollback()
             raise
+    
+    def get_by_pacote(self, pacote_id):
+        return self.bd.query(Exercicio).filter_by(pacote_id=pacote_id).all( ) 

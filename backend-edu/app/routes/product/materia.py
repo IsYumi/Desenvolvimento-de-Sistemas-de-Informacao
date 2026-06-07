@@ -43,14 +43,16 @@ def delete():
     except Exception as e:
         return jsonify({"ok": False, "mensagem": "Erro ao deletar"}), 500
     
+# Coloque no seu arquivo de rotas da matéria (ex: materia.py dentro de routes)
 @materia_bp.route('/get/<int:id>', methods=['GET', 'OPTIONS'])
 def get_materia(id):
     if request.method == 'OPTIONS':
         return jsonify({'message': 'OK'}), 200
     try:
-        materia = materia_service.get_by_id(id)
-        if materia:
-            return jsonify({"ok": True, "materia": materia}), 200
+        from app.services.product import materia as materia_service
+        materia_data = materia_service.get_by_id(id)
+        if materia_data:
+            return jsonify({"ok": True, "materia": materia_data}), 200
         return jsonify({"ok": False, "mensagem": "Matéria não encontrada"}), 404
     except Exception as e:
         return jsonify({"ok": False, "mensagem": str(e)}), 500

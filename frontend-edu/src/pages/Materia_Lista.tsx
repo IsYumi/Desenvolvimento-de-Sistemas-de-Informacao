@@ -1,25 +1,28 @@
+import "../styles/Materia_Lista.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Materia.css";
 import Navbar from "../components/Navbar";
-import { apiGet } from "../service/api"; // Ajuste o caminho se necessário
+import { apiGet } from "../service/api";
 
-// Definição da estrutura de um Pacote baseado no que você precisa exibir e navegar
+// Definição da estrutura de um Pacote
 interface Pacote {
-  id: string; // ou number, dependendo da sua API
+  id: string | number;
   nome: string;
   descricao?: string;
 }
 
+// NOVA INTERFACE: Reflete exatamente o que o Python devolve no jsonify
+interface RespostaPacotes {
+  ok: boolean;
+  pacotes: Pacote[];
+}
+
 export default function Materia_Usuario() {
   const navigate = useNavigate();
-  // Pega o id da matéria/página atual que está no final do endereço URL
   const { id } = useParams<{ id: string }>();
 
-  // Estado para armazenar a lista de pacotes que vem da API
   const [pacotes, setPacotes] = useState<Pacote[]>([]);
-
-  // Estados para controle de feedback visual
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState<string | null>(null);
 
@@ -31,9 +34,15 @@ export default function Materia_Usuario() {
         setCarregando(true);
         setErro(null);
 
-        const dados = await apiGet<Pacote[]>(`/pacote/get/${id}`);
+        // Atualizamos a tipagem para RespostaPacotes
+        const dados = await apiGet<RespostaPacotes>(`/pacote/get/${id}`);
 
-        setPacotes(dados || []);
+        // Agora acessamos a chave .pacotes de dentro da resposta
+        if (dados && dados.ok) {
+          setPacotes(dados.pacotes || []);
+        } else {
+          throw new Error("Falha ao carregar do servidor.");
+        }
       } catch (err: any) {
         console.error("Erro ao buscar pacotes:", err);
         setErro(err.message || "Não foi possível carregar os pacotes.");
@@ -64,7 +73,6 @@ export default function Materia_Usuario() {
         )}
 
         {!carregando && !erro && pacotes.length > 0 && (
-          // Caixa/Container principal que lista os pacotes
           <div className="lista-pacotes-container">
             {pacotes.map((pacote) => (
               <div key={pacote.id} className="pacote-card">
@@ -73,10 +81,9 @@ export default function Materia_Usuario() {
                   {pacote.descricao && <p>{pacote.descricao}</p>}
                 </div>
 
-                {/* Botão que leva o usuário para /exercicio-fazer/:idDoPacote */}
                 <button
                   className="botao-abrir"
-                  onClick={() => navigate(`/exercicio-fazer/${pacote.id}`)}
+                  onClick={() => navigate(`/pacote-lista/${pacote.id}`)}
                 >
                   Abrir
                 </button>

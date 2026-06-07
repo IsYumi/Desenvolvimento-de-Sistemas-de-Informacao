@@ -21,3 +21,8 @@ def delete(materia_id):
         materia_repo = MateriaRepository(db)
         return materia_repo.delete(materia_id)
     
+def get_by_id(materia_id):
+    with SessionLocal() as db:
+        repo = MateriaRepository(db)
+        materia = repo.get(materia_id)
+        return materia.to_dict() if materia else None

@@ -43,3 +43,14 @@ def delete():
     except Exception as e:
         return jsonify({"ok": False, "mensagem": "Erro ao deletar"}), 500
     
+@materia_bp.route('/get/<int:id>', methods=['GET', 'OPTIONS'])
+def get_materia(id):
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'OK'}), 200
+    try:
+        materia = materia_service.get_by_id(id)
+        if materia:
+            return jsonify({"ok": True, "materia": materia}), 200
+        return jsonify({"ok": False, "mensagem": "Matéria não encontrada"}), 404
+    except Exception as e:
+        return jsonify({"ok": False, "mensagem": str(e)}), 500

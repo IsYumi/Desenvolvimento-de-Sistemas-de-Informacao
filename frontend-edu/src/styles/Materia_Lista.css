@@ -1,0 +1,67 @@
+/* =========================================
+   ESTILOS DOS CARDS DE PACOTES
+   ========================================= */
+
+.lista-pacotes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.pacote-card {
+  background: #ffffff;
+  border: 2px solid #000;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pacote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.pacote-info {
+  margin-bottom: 24px;
+}
+
+.pacote-info h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+  color: #000; /* Força o texto a ficar preto e visível */
+  text-transform: uppercase;
+}
+
+.pacote-info p {
+  font-size: 14px;
+  color: #4d4d4d; /* Cinza escuro para a descrição */
+  margin: 0;
+  line-height: 1.5;
+}
+
+.botao-abrir {
+  background: #63ff96; /* Verde seguindo o padrão dos seus botões */
+  color: #000;
+  border: none;
+  padding: 14px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  text-transform: uppercase;
+}
+
+.botao-abrir:hover {
+  background: #4ae87d;
+}

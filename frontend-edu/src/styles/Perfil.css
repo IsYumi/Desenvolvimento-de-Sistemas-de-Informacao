@@ -1,0 +1,176 @@
+.perfil-page {
+  min-height: 100vh;
+  background: #f1f5f6;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+.perfil-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 120px 40px 40px;
+  box-sizing: border-box;
+}
+
+.perfil-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.08);
+  padding: 36px;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.perfil-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.perfil-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+  width: 280px;
+  height: 3px;
+  background: #000;
+}
+
+.perfil-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.perfil-column {
+  display: grid;
+  gap: 22px;
+}
+
+.perfil-field {
+  display: grid;
+  gap: 10px;
+}
+
+.perfil-field label {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.perfil-field input {
+  width: 100%;
+  border: none;
+  border-radius: 18px;
+  background: #f5f2f2;
+  padding: 18px 20px;
+  font-size: 14px;
+  color: #1f2937;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.perfil-field input::placeholder {
+  color: #8b8b8b;
+}
+
+.perfil-radio-group {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.perfil-radio-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #f6f6f6;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.perfil-radio-group input {
+  width: 16px;
+  height: 16px;
+  accent-color: #000;
+}
+
+.perfil-plan-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: #f3f1ef;
+}
+
+.perfil-plan-box span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4b5563;
+}
+
+.perfil-plan-box strong {
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: #f2f2f2;
+  color: #111111;
+  font-size: 14px;
+}
+
+.perfil-button {
+  border: none;
+  border-radius: 14px;
+  padding: 16px 22px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.perfil-button:hover {
+  transform: translateY(-1px);
+}
+
+.perfil-button-primary {
+  background: #7bff95;
+  color: #000;
+}
+
+.perfil-button-secondary {
+  background: #fee28e;
+  color: #111;
+}
+
+.perfil-button-danger {
+  background: #ff3d3d;
+  color: #ffffff;
+}
+
+@media (max-width: 960px) {
+  .perfil-container {
+    padding: 120px 24px 24px;
+  }
+
+  .perfil-grid {
+    grid-template-columns: 1fr;
+  }
+}

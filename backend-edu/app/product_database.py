@@ -18,5 +18,7 @@ SessionLocal = sessionmaker(
 Base = declarative_base()
 
 def load_products():
-    
+    from app.models.product import pacote
+    from app.models.product import materia
+    from app.models.product import exercicio
     Base.metadata.create_all(bind=engine)

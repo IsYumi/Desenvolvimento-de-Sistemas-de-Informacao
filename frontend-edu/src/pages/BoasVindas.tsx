@@ -9,11 +9,21 @@ export default function BoasVindas() {
 
   const [nome, setNome] = useState("Usuário");
   const [genero, setGenero] = useState("masculino");
+  const [imagem, setImagem] = useState(boy);
 
-  const imagem = genero === "feminino" ? girl : boy;
+  const selecionarImagem = (generoUsuario: string) => {
+    if (generoUsuario === "F") {
+      return girl;
+    } else if (generoUsuario === "M") {
+      return boy;
+    } else {
+      // Qualquer outro valor (prefiro não informar, etc) escolhe aleatoriamente
+      return Math.random() > 0.5 ? girl : boy;
+    }
+  };
 
   useEffect(() => {
-    async function buscarNome() {
+    async function buscarDados() {
       try {
         const resposta = await fetch("http://localhost:3333/user/name", {
           method: "GET",
@@ -26,12 +36,19 @@ export default function BoasVindas() {
 
         const dados = await resposta.json();
         setNome(dados.nome || "Usuário");
+
+        // Se a API retorna o gênero, usa; caso contrário, tenta buscar separadamente
+        if (dados.genero) {
+          const imagemSelecionada = selecionarImagem(dados.genero);
+          setGenero(dados.genero);
+          setImagem(imagemSelecionada);
+        }
       } catch (erro) {
         console.error("Erro ao buscar nome:", erro);
       }
     }
 
-    buscarNome();
+    buscarDados();
 
     const timer = setTimeout(() => {
       navigate("/home");

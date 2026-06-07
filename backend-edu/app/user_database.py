@@ -20,4 +20,5 @@ Base = declarative_base()
 def load_users():
     from app.models.user.user import User
     from app.models.user.otp import Otp
+    from app.models.user.cartao import Cartao
     Base.metadata.create_all(bind=engine)

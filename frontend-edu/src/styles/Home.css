@@ -48,18 +48,27 @@
   background: transparent;
 }
 
-.nav-center a {
+.nav-center a,
+.nav-link {
   text-decoration: none;
   font-weight: 700;
   color: #000;
   font-size: 16px;
-  transition: opacity 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    border-bottom 0.3s ease;
   background: transparent;
   padding: 5px 0;
+  border-bottom: 3px solid transparent;
 }
 
-.nav-center a:hover {
+.nav-center a:hover,
+.nav-link:hover {
   opacity: 0.7;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid #000;
 }
 
 /* BOTÃO SAIR */
@@ -103,7 +112,7 @@
 .titulo-section {
   display: flex;
   align-items: flex-end;
-  margin-top: 10px;
+  margin-top: -8px; /* levantado 5px */
   margin-bottom: 25px;
   margin-left: -30px;
   margin-right: -30px;
@@ -111,6 +120,7 @@
   padding-left: 30px;
   padding-right: 30px;
   border-bottom: 3px solid #000;
+  transform: translateY(-5px); /* subindo 5px */
 }
 
 .titulo-text {
@@ -127,8 +137,8 @@
 .urso-mascote {
   width: 85px;
   height: auto;
-  margin-top: 10px;
-  transform: translateY(5.5px);
+  margin-top: 5px; /* ajustado para ficar maior proximidade e subir */
+  transform: translateY(6px); /* subindo 5px */
 }
 
 /* SEÇÃO MATÉRIAS */

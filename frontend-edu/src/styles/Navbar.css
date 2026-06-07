@@ -1,0 +1,90 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #7fb4b2;
+  padding: 12px 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav-center {
+  display: flex;
+  gap: 50px;
+  flex: 1;
+  justify-content: center;
+  background: transparent;
+}
+
+.nav-center .nav-link,
+.nav-link {
+  text-decoration: none;
+  font-weight: 700;
+  color: #000;
+  font-size: 16px;
+  transition: opacity 0.3s ease, border-bottom 0.3s ease;
+  background: transparent;
+  padding: 5px 0;
+  border-bottom: 3px solid transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-center .nav-link:hover,
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid #000;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.btn-sair {
+  background: rgba(250, 211, 204, 0.9);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  flex-shrink: 0;
+  color: #000;
+}
+
+.btn-sair:hover {
+  background: rgba(239, 217, 195, 0.95);
+  transform: none;
+  box-shadow: none;
+}

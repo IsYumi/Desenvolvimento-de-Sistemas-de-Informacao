@@ -5,6 +5,9 @@ from app.product_database import load_products
 from app.utils.exceptions import AppError
 from app.routes.user.user import user_bp
 from app.routes.user.auth import auth_bp
+from app.routes.product.exercicio import exercicio_bp
+from app.routes.product.materia import materia_bp
+from app.routes.product.pacote import pacote_bp
 from sqlalchemy.exc import SQLAlchemyError
 
 def create_app():
@@ -25,6 +28,9 @@ def create_app():
 
     app.register_blueprint(user_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(exercicio_bp)
+    app.register_blueprint(materia_bp)
+    app.register_blueprint(pacote_bp)
     return app
 
 

@@ -62,15 +62,16 @@ def get():
         print("Erro get:", e)
         return jsonify({"ok": False, "mensagem": "Erro ao buscar exercício"}), 500
     
-@exercicio_bp.route('/get_by_pacote', methods = ['GET', 'OPTIONS'])
-@exercicio_bp.route('/get_by_pacote/', methods = ['GET', 'OPTIONS'])
-def get_by_pacote():
+@exercicio_bp.route('/get/<int:pacote_id>', methods=['GET', 'OPTIONS'])
+@exercicio_bp.route('/get/<int:pacote_id>/', methods=['GET', 'OPTIONS'])
+def get_exercicios_por_pacote(pacote_id):
     if request.method == 'OPTIONS':
         return jsonify({'message': 'OK'}), 200
     try:
-        pacote_id = int(request.args.get('pacote_id'))
-        exercicios = exercicio_service.get_by_pacote(pacote_id)
-        return jsonify({"ok": True, "exercicios": exercicios}), 200
+        lista_exercicios = exercicio_service.get_by_pacote(pacote_id)
+        return jsonify({
+            "ok": True, 
+            "exercicios": lista_exercicios
+        }), 200
     except Exception as e:
-        print("Erro get_by_pacote:", e)
-        return jsonify({"ok": False, "mensagem": "Erro ao buscar exercícios por pacote"}), 500
+        return jsonify({"ok": False, "mensagem": str(e)}), 500

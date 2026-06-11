@@ -86,7 +86,7 @@ export default function Home() {
                 </div>
                 <button
                   className="botao-abrir"
-                  onClick={() => navigate(`/materia-lista/${materia.id}`)}
+                  onClick={() => navigate(`/lista/materia/${materia.id}`)}
                 >
                   Ver Pacotes
                 </button>

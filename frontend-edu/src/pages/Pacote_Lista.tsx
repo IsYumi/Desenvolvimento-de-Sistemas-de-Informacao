@@ -103,7 +103,7 @@ export default function Pacote_Lista() {
                 {/* Botão que leva para a nova tela */}
                 <button
                   className="botao-abrir"
-                  onClick={() => navigate(`/exercicio-fazer/${exercicio.id}`)}
+                  onClick={() => navigate(`/lista/exercicio/${exercicio.id}`)}
                 >
                   Fazer Exercício
                 </button>

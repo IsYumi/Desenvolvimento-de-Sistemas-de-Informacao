@@ -125,7 +125,7 @@ export default function Materia_Usuario() {
 
                 <button
                   className="botao-abrir"
-                  onClick={() => navigate(`/pacote-lista/${pacote.id}`)}
+                  onClick={() => navigate(`/lista/pacote/${pacote.id}`)}
                 >
                   Abrir
                 </button>

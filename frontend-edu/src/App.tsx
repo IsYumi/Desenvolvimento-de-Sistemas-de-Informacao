@@ -8,8 +8,6 @@ import Update from "./pages/Update";
 import Perfil from "./pages/Perfil";
 import Materia from "./pages/Materia";
 import Editar_Materia from "./pages/Editar_Materia";
-import Listar_Materia from "./pages/Listar_Materia";
-import Materias_Disponiveis from "./pages/Materias_Disponiveis";
 import Pacote from "./pages/Pacote";
 import Exercicio from "./pages/Exercicio";
 import Editar_Pacote from "./pages/Editar_Pacote";
@@ -30,21 +28,19 @@ export default function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/update" element={<Update />} />
         <Route path="/perfil" element={<Perfil />} />
-        <Route path="/materia" element={<Materia />} />
-        <Route path="/listar-materia" element={<Listar_Materia />} />
-        <Route
-          path="/materias-disponiveis"
-          element={<Materias_Disponiveis />}
-        />
-        <Route path="/editar-materia" element={<Editar_Materia />} />
-        <Route path="/pacote" element={<Pacote />} />
-        <Route path="/editar-pacote" element={<Editar_Pacote />} />
-        <Route path="/exercicio" element={<Exercicio />} />
-        <Route path="/editar-exercicio" element={<Editar_Exercicio />} />
         <Route path="/assinatura" element={<Assinatura />} />
-        <Route path="/materia-lista/:id" element={<Materia_Usuario />} />
-        <Route path="/pacote-lista/:id" element={<Pacote_Lista />} />
-        <Route path="/exercicio-fazer/:id" element={<Exercicio_Fazer />} />
+
+        <Route path="add/materia" element={<Materia />} />
+        <Route path="add/pacote" element={<Pacote />} />
+        <Route path="add/exercicio" element={<Exercicio />} />
+
+        <Route path="editar/materia" element={<Editar_Materia />} />
+        <Route path="editar/pacote" element={<Editar_Pacote />} />
+        <Route path="editar/exercicio" element={<Editar_Exercicio />} />
+
+        <Route path="lista/materia/:id" element={<Materia_Usuario />} />
+        <Route path="lista/pacote/:id" element={<Pacote_Lista />} />
+        <Route path="lista/exercicio/:id" element={<Exercicio_Fazer />} />
       </Routes>
     </BrowserRouter>
   );
